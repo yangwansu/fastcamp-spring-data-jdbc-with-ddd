@@ -8,3 +8,5 @@
  */
 
 rootProject.name = 'fastcamp-spring-data-jdbc-with-ddd'
+
+include('spring-data-jdbc', 'spring-data-jpa')
