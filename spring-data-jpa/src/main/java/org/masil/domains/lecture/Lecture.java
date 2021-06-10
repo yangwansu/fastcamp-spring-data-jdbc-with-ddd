@@ -10,6 +10,7 @@ import org.masil.domains.term.LectureAddAdaptor;
 import org.masil.domains.term.Term;
 
 import javax.persistence.*;
+import java.util.Collections;
 import java.util.List;
 
 @Getter
@@ -36,4 +37,28 @@ public class Lecture {
     @OneToMany(mappedBy = "lecture")
     private List<Registration> registrations;
 
+    public List<Registration> getRegistrations() {
+        return Collections.unmodifiableList(registrations);
+    }
+
+    void add(Registration aRegistration) {
+        registrations.add(aRegistration);
+    }
+
+    public static final class AddAdaptor {
+
+        public static AddAdaptor of(Lecture aLecture) {
+            return new AddAdaptor(aLecture);
+        }
+
+        private final Lecture lecture;
+
+        private AddAdaptor(Lecture aLecture) {
+            this.lecture = aLecture;
+        }
+
+        public void add(Registration aRegistration) {
+            this.lecture.add(aRegistration);
+        }
+    }
 }

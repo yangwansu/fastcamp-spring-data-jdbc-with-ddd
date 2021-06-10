@@ -17,6 +17,14 @@ import javax.persistence.ManyToOne;
 @AllArgsConstructor(access = AccessLevel.PRIVATE)
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
 public class Registration {
+
+    public static Registration create(Student student, Lecture lecture) {
+        Registration newRegistration = new Registration(null, student, lecture);
+        Lecture.AddAdaptor.of(lecture).add(newRegistration);
+        Student.AddAdaptor.of(student).add(newRegistration);
+        return newRegistration;
+    }
+
     @Id
     @GeneratedValue
     private Long id;

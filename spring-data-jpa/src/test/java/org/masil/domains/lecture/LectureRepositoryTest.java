@@ -2,6 +2,7 @@ package org.masil.domains.lecture;
 
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
+import org.masil.domains.regisgration.Registration;
 import org.masil.domains.term.Term;
 import org.masil.domains.term.TermRepository;
 import org.springframework.beans.factory.annotation.Autowired;
