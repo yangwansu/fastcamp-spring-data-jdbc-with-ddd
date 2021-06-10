@@ -1,0 +1,1 @@
+CREATE TABLE IF NOT EXISTS TERM (id bigint primary key identity, name varchar(100))
