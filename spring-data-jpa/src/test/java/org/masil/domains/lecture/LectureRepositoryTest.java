@@ -19,33 +19,38 @@ class LectureRepositoryTest {
 
     @Autowired
     LectureRepository lectureRepository;
-    Long lectureID;
 
     @Autowired
     EntityManager em;
 
+    Term term;
+    Long lectureID;
+
     @BeforeEach
     void setUp() {
-        Term aTerm = Term.of("2021.1");
-        termRepository.save(aTerm);
-        System.out.println("aTerm" + aTerm);
+        this.term = Term.of("2021.1");
+        termRepository.save(term);
 
-        Lecture aLecture = Lecture.create(aTerm, "Spring Boot");
-
-        System.out.println("aLecture" + aLecture);
-
+        Lecture aLecture = Lecture.create(term, "Spring Boot");
         lectureID = lectureRepository.save(aLecture).getId();
 
+        // flush and remove l1 cache
         em.flush();
+        em.clear();
     }
 
+    /**
+     * @see #setUp()
+     */
     @Test
-    void save() {
-        Iterable<Lecture> all = lectureRepository.findAll();
+    void find() {
         Optional<Lecture> find = lectureRepository.findById(lectureID);
         Lecture aLecture = find.orElse(null);
-        System.out.println("aTerm" + aLecture.getTerm());
-        System.out.println("aLecture" + aLecture);
-        //assertThat(aLecture.getTerm().getLectures().get(0)).isNotNull();
+
+        assertThat(aLecture.getTerm().getId()).isEqualTo(term.getId());
+
+        Lecture lazyLecture = aLecture.getTerm().getLectures().get(0);
+
+        assertThat(lazyLecture.getId()).isEqualTo(aLecture.getId());
     }
 }

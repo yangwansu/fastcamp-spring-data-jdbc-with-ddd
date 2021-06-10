@@ -6,11 +6,9 @@ import lombok.NoArgsConstructor;
 import org.assertj.core.util.Lists;
 import org.masil.domains.lecture.Lecture;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.Id;
-import javax.persistence.OneToMany;
+import javax.persistence.*;
 
+import java.util.Collections;
 import java.util.List;
 
 import static lombok.AccessLevel.PRIVATE;
@@ -23,14 +21,23 @@ import static lombok.AccessLevel.PROTECTED;
 public class Term {
 
     public static Term of(String name) {
-        return new Term(null, name);
+        return new Term(null, name, Lists.newArrayList());
     }
     @Id
-    @GeneratedValue
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
     private String name;
 
+    @OneToMany(mappedBy = "term")
+    private List<Lecture> lectures;
 
+    public List<Lecture> getLectures() {
+        return Collections.unmodifiableList(lectures);
+    }
+
+    void addLecture(Lecture aLecture) {
+        lectures.add(aLecture);
+    }
 
 }

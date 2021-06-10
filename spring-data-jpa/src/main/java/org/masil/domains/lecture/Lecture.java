@@ -6,6 +6,7 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import org.assertj.core.util.Lists;
 import org.masil.domains.regisgration.Registration;
+import org.masil.domains.term.LectureAddAdaptor;
 import org.masil.domains.term.Term;
 
 import javax.persistence.*;
@@ -18,14 +19,16 @@ import java.util.List;
 public class Lecture {
 
     public static Lecture create(Term term, String title) {
-        return new Lecture(null, term, title, Lists.newArrayList());
+        Lecture aLecture = new Lecture(null, term, title, Lists.newArrayList());
+        LectureAddAdaptor.of(term).add(aLecture);
+        return aLecture;
     }
 
     @Id
-    @GeneratedValue
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @ManyToOne
+    @ManyToOne(fetch = FetchType.EAGER)
     private Term term;
 
     private String title;
