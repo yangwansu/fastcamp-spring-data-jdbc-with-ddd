@@ -13,7 +13,7 @@ dependencies {
     implementation 'org.springframework.boot:spring-boot-starter-web'
     implementation 'org.springframework.boot:spring-boot-starter-data-jdbc'
     runtimeOnly'org.hsqldb:hsqldb'
-
+    implementation("org.jmolecules:jmolecules-ddd:1.2.0")
     implementation 'org.springframework.boot:spring-boot-starter-test'
 
 }

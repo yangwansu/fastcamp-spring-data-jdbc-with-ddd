@@ -1,5 +1,6 @@
 package org.masil;
 
+import org.masil.infrastructure.repositories.DataJdbcLectureRepository;
 import org.masil.infrastructure.repositories.DataJdbcTermRepository;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
@@ -16,7 +17,10 @@ public class App {
     public static class DataJdbcConfig extends AbstractJdbcConfiguration {
         @Override
         public JdbcCustomConversions jdbcCustomConversions() {
-            return new JdbcCustomConversions(Arrays.asList(DataJdbcTermRepository.LongToTermId.INSTANCE, DataJdbcTermRepository.TermIdToLong.INSTANCE));
+            return new JdbcCustomConversions(Arrays.asList(
+                    DataJdbcTermRepository.LongToTermId.INSTANCE, DataJdbcTermRepository.TermIdToLong.INSTANCE,
+                    DataJdbcLectureRepository.LongToLectureId.INSTANCE, DataJdbcLectureRepository.LectureIdToLong.INSTANCE
+                    ));
         }
     }
 
