@@ -28,4 +28,5 @@ class LectureRepositoryTest {
 
         assertThat(find.getId()).isEqualTo(saved.getId());
     }
+
 }

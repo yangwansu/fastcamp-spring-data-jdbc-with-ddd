@@ -27,7 +27,7 @@ public interface DataJdbcTermRepository extends Repository<Term, TermId> , TermR
 
         @Override
         public TermId convert(Long source) {
-            return TermId.of(source);
+            return TermId.create(source);
         }
     }
 }
