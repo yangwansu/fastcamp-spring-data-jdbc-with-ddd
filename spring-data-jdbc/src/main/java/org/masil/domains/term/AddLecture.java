@@ -4,6 +4,6 @@ import lombok.Value;
 
 
 @Value(staticConstructor = "create")
-public class NewLecture {
+public class AddLecture {
     String name;
 }

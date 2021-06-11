@@ -7,6 +7,7 @@ import org.masil.domains.lecture.LectureId;
 import org.springframework.data.annotation.Id;
 import org.springframework.data.annotation.PersistenceConstructor;
 import org.springframework.data.annotation.Version;
+import org.springframework.data.domain.AbstractAggregateRoot;
 import org.springframework.data.jdbc.core.mapping.AggregateReference;
 
 import java.time.Year;
@@ -15,7 +16,7 @@ import java.util.Set;
 
 @Getter
 @AllArgsConstructor(access = AccessLevel.PRIVATE, onConstructor_=@PersistenceConstructor)
-public class Term {
+public class Term extends AbstractAggregateRoot<Term> {
 
     @Deprecated
     public static Term of(String name,int limitOfLectures) {
@@ -45,7 +46,7 @@ public class Term {
         return lectures;
     }
 
-    public void add(NewLecture aLecture) {
+    public void add(AddLecture aLecture) {
         if( this.lectures.size() >= limitOfLectures ) {
             throw new IllegalStateException("학기의 총 강의 수를 초가 할 수 없습니다.");
         }
@@ -53,5 +54,7 @@ public class Term {
         LectureId lectureId = this.id.createALectureId(this.lectures);
 
         this.lectures.add(TermLecture.of(AggregateReference.to(lectureId)));
+
+        andEvent(new LectureAdded(lectureId, aLecture.getName()));
     }
 }

@@ -34,7 +34,7 @@ class TermRepositoryTest {
     @Test
     void addLecture() {
         Term aTerm = Term.of("2021-1", 1);
-        aTerm.add(NewLecture.create("Spring boot"));
+        aTerm.add(AddLecture.create("Spring boot"));
 
         Term saved = termRepository.save(aTerm);
 

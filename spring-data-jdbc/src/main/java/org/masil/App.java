@@ -7,9 +7,11 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.data.jdbc.core.convert.JdbcCustomConversions;
 import org.springframework.data.jdbc.repository.config.AbstractJdbcConfiguration;
+import org.springframework.scheduling.annotation.EnableAsync;
 
 import java.util.Arrays;
 
+@EnableAsync
 @SpringBootApplication
 public class App {
 

@@ -14,9 +14,9 @@ public class TermTest {
     @Test
     void limit_Of_Lecture_on_term() {
         Term aTerm = Term.of("2021-1", 1);
-        aTerm.add(NewLecture.create("SPRING MVC"));
+        aTerm.add(AddLecture.create("SPRING MVC"));
 
-        assertThatThrownBy(()->aTerm.add(NewLecture.create("SPRING BOOT")))
+        assertThatThrownBy(()->aTerm.add(AddLecture.create("SPRING BOOT")))
                 .isInstanceOf(IllegalStateException.class)
                 .hasMessage("학기의 총 강의 수를 초가 할 수 없습니다.");
     }
@@ -25,7 +25,7 @@ public class TermTest {
     @Test
     void lectureId_made_by_termid() {
         Term aTerm = Term.of(Year.of(2021), Quarter.Q1,  1);
-        aTerm.add(NewLecture.create("SPRING MVC"));
+        aTerm.add(AddLecture.create("SPRING MVC"));
 
         TermLecture map = aTerm.getLectures().iterator().next();
 
