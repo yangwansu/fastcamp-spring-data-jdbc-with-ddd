@@ -47,7 +47,7 @@ public class Term extends AbstractAggregateRoot<Term> {
     }
 
     public void add(AddLecture aLecture) {
-        if( this.lectures.size() >= limitOfLectures ) {
+        if(isFull()) {
             throw new IllegalStateException("학기의 총 강의 수를 초가 할 수 없습니다.");
         }
 
@@ -55,6 +55,10 @@ public class Term extends AbstractAggregateRoot<Term> {
 
         this.lectures.add(TermLecture.of(AggregateReference.to(lectureId)));
 
-        andEvent(new LectureAdded(lectureId, aLecture.getName()));
+        andEvent(new LectureAdded(lectureId, id, aLecture.getName()));
+    }
+
+    private boolean isFull() {
+        return this.lectures.size() >= limitOfLectures;
     }
 }

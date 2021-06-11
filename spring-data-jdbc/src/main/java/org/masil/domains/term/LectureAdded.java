@@ -7,5 +7,6 @@ import org.masil.domains.lecture.LectureId;
 public class LectureAdded {
 
     LectureId lectureId;
+    TermId termId;
     String name;
 }

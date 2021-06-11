@@ -32,7 +32,7 @@ public class LectureAddedPublishTest {
         LectureId id = aTerm.getLectures().iterator().next().getLecture().getId();
 
         assertThat(applicationEvents.stream(LectureAdded.class))
-                .containsExactly(new LectureAdded(id, "Spring boot"));
+                .containsExactly(new LectureAdded(id, aTerm.getId(), "Spring boot"));
         //verify(context).publishEvent(any(NewLectureAdded.class));
     }
 }
