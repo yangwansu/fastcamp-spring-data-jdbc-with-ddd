@@ -10,7 +10,7 @@ import java.util.Optional;
 
 import static org.assertj.core.api.Assertions.assertThat;
 @DataJpaTest
-class TermRepositoryTest {
+class TermRepositoryTest2 {
 
     @Autowired
     TermRepository termRepository;
